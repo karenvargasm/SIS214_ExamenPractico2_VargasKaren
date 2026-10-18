@@ -112,14 +112,15 @@ corresponde a la evaluación docente.
 | HTML5 semántico y accesibilidad (20 pts) | La landing usa las siete etiquetas estructurales requeridas, atributos WAI-ARIA y no usa `<div>`. El validador W3C Nu no reportó mensajes para el HTML publicado. |
 | CSS3 responsivo y maquetación (20 pts) | CSS Mobile-First con Flexbox, Grid, media queries y los tokens/reset requeridos. Se comprobó en móvil, tablet y escritorio (320, 390, 768, 1024 y 1440 px), sin desbordamiento horizontal. |
 | JavaScript ES6+, DOM y persistencia (35 pts) | Están implementadas las cinco funciones exigidas: tema persistente, menú ARIA, filtro inmutable, formulario con validación y módulo REST asíncrono. Se probaron sus estados principales, incluida la respuesta 404 de GitHub. |
-| Git, GitHub y despliegue (15 pts) | Repositorio público con la nomenclatura solicitada, historial de 34 commits y GitHub Pages operativo. El despliegue del commit `67c7b2f` terminó correctamente. |
+| Git, GitHub y despliegue (15 pts) | Repositorio público con la nomenclatura solicitada, historial de 36 commits y GitHub Pages operativo. El despliegue del commit `7e3b01e` terminó correctamente. |
 | README y buenas prácticas (10 pts) | Este documento describe tecnologías, arquitectura, instrucciones locales y enlaces públicos. El código se organiza en módulos y sigue las convenciones de nombres indicadas. |
 
 **Nota de validación CSS:** el validador CSS3 de W3C/Jigsaw marca `clip-path`
 en `.sr_only` como propiedad desconocida. `clip-path` es una propiedad CSS
 moderna utilizada para ocultar visualmente texto accesible; el aviso corresponde
-a la compatibilidad del perfil del validador, no a un error reportado por el
-navegador. El resto de la hoja se carga en producción.
+a la compatibilidad del perfil CSS3 del validador, no a un error reportado por
+el navegador. Los recursos CSS y JavaScript requeridos responden correctamente
+en GitHub Pages.
 
 Las pruebas descritas son comprobaciones funcionales manuales en navegador; el
 repositorio no incluye una suite automatizada de pruebas.
