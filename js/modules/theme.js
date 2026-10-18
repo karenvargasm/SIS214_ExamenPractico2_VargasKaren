@@ -37,22 +37,31 @@ function getSystemTheme() {
     : THEMES.light;
 }
 
-function applyTheme(theme, toggleButton) {
+function applyTheme(theme, toggleButton, toggleLabel) {
+  const isDark = theme === THEMES.dark;
   document.documentElement.dataset.theme = theme;
-  toggleButton.setAttribute('aria-pressed', String(theme === THEMES.dark));
+  toggleButton.setAttribute('aria-pressed', String(isDark));
+  toggleButton.setAttribute(
+    'aria-label',
+    `Modo ${isDark ? 'oscuro' : 'claro'}. Activar modo ${isDark ? 'claro' : 'oscuro'}`
+  );
+  if (toggleLabel) {
+    toggleLabel.textContent = `Modo ${isDark ? 'oscuro' : 'claro'}`;
+  }
 }
 
 export function initTheme() {
   const toggleButton = document.getElementById('theme_toggle');
   if (!toggleButton) return;
+  const toggleLabel = document.getElementById('theme_label');
 
-  applyTheme(readStoredTheme() ?? getSystemTheme(), toggleButton);
+  applyTheme(readStoredTheme() ?? getSystemTheme(), toggleButton, toggleLabel);
 
   toggleButton.addEventListener('click', () => {
     const isDark = document.documentElement.dataset.theme === THEMES.dark;
     const nextTheme = isDark ? THEMES.light : THEMES.dark;
 
-    applyTheme(nextTheme, toggleButton);
+    applyTheme(nextTheme, toggleButton, toggleLabel);
     storeTheme(nextTheme);
   });
 }
