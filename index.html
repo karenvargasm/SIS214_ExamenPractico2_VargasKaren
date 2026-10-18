@@ -1,72 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Karen Vargas Medrano - Desarrolladora Web</title>
-<meta name="description" content="CV interactivo de Karen Grissel Vargas Medrano, estudiante de Ingeniería de Sistemas.">
-<link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/pages.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karen Vargas · CV Interactivo</title>
+  <meta name="description" content="CV interactivo de Karen Grissel Vargas Medrano, estudiante de Ingeniería de Sistemas en la Universidad Católica Boliviana San Pablo.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script type="module" src="js/main.js"></script>
 </head>
 <body>
+  <a class="skip_link" href="#contenido_principal">Saltar al contenido principal</a>
 
-<a class="skip_link" href="#contenido_principal">Saltar al contenido principal</a>
+  <header class="site_header">
+    <a class="logo_link" href="#inicio" aria-label="Karen Vargas, ir al inicio">
+      <img class="logo_badge" src="assets/images/logo-institucional.png" alt="" width="36" height="36">
+      <span class="logo_name">Karen Vargas · CV</span>
+    </a>
 
-<header class="site_header">
-  <div class="header_inner">
-    <a class="logo_link" href="index.html">
-  <img src="assets/images/logo-institucional.png" alt="Universidad Católica Boliviana San Pablo" class="logo_badge" width="34" height="34">
-  <span class="logo_text">
-    <span class="logo_name">Karen Vargas · CV</span>
-  </span>
-</a>
-    <div class="header_actions">
-<button id="theme_toggle" class="theme_toggle" type="button" aria-pressed="false">
-  <span class="toggle_icon" aria-hidden="true">
-    <svg class="icon_sun" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="4.3" stroke="currentColor" stroke-width="1.7"/>
-      <path d="M12 2.5V5.2M12 18.8V21.5M4.5 12H1.8M22.2 12H19.5M5.7 5.7L7.6 7.6M16.4 16.4L18.3 18.3M18.3 5.7L16.4 7.6M7.6 16.4L5.7 18.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-    </svg>
-    <svg class="icon_moon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20.2 14.3A8.4 8.4 0 1 1 9.7 3.8a6.6 6.6 0 0 0 10.5 10.5Z" fill="currentColor"/>
-    </svg>
-  </span>
-  <span class="toggle_label">Modo oscuro</span>
-</button>
-      <button id="mobile_nav_toggle" class="mobile_nav_toggle" type="button" aria-label="Abrir menú" aria-controls="side_nav" aria-expanded="false">
-        <span></span>
+    <nav class="main_nav" id="main_nav" aria-label="Navegación principal">
+      <ul class="nav_list">
+        <li><a class="nav_link" href="#perfil">Perfil</a></li>
+        <li><a class="nav_link" href="#formacion">Formación</a></li>
+        <li><a class="nav_link" href="#habilidades">Habilidades</a></li>
+        <li><a class="nav_link" href="#proyectos">Proyectos</a></li>
+        <li><a class="nav_link" href="#experiencia">Experiencia</a></li>
+        <li><a class="nav_link" href="#github">GitHub</a></li>
+        <li><a class="nav_link" href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <section class="header_actions" aria-label="Preferencias de la interfaz">
+      <button class="theme_toggle" id="theme_toggle" type="button" aria-pressed="false" aria-label="Activar modo oscuro">
+        <svg class="icon_moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M20.2 14.3A8.4 8.4 0 1 1 9.7 3.8a6.6 6.6 0 0 0 10.5 10.5Z" fill="currentColor"/>
+        </svg>
+        <svg class="icon_sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M12 2.5V5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <span class="theme_label" id="theme_label">Modo oscuro</span>
       </button>
-    </div>
-  </div>
-</header>
-
-<div class="layout_shell">
-  <nav class="side_nav" id="side_nav" aria-label="Navegación principal">
-    <p class="nav_heading">Secciones del CV</p>
-    <ul class="nav_list">
-      <li><a href="index.html" class="nav_link"><span class="nav_dot" style="--dot-color:#61afef"></span>Inicio</a></li>
-      <li><a href="perfil.html" class="nav_link"><span class="nav_dot" style="--dot-color:#c586c0"></span>Perfil profesional</a></li>
-      <li><a href="formacion.html" class="nav_link"><span class="nav_dot" style="--dot-color:#98c379"></span>Formación académica</a></li>
-      <li><a href="habilidades.html" class="nav_link"><span class="nav_dot" style="--dot-color:#e5a260"></span>Habilidades técnicas</a></li>
-      <li><a href="proyectos.html" class="nav_link"><span class="nav_dot" style="--dot-color:#f07178"></span>Proyectos académicos</a></li>
-      <li><a href="experiencia.html" class="nav_link"><span class="nav_dot" style="--dot-color:#61afef"></span>Experiencia</a></li>
-      <li><a href="contacto.html" class="nav_link"><span class="nav_dot" style="--dot-color:#c586c0"></span>Contacto</a></li>
-    </ul>
-    <p class="nav_footer_note">SIS-214 / Tecnologías Web I</p>
-  </nav>
+      <button class="menu_toggle" id="menu_toggle" type="button" aria-label="Abrir menú" aria-controls="main_nav" aria-expanded="false">
+        <span class="menu_bars" aria-hidden="true"></span>
+      </button>
+    </section>
+  </header>
 
   <main id="contenido_principal">
 
-    <section class="hero_section">
-      <div class="hero_text reveal_on_scroll">
-        <p class="hero_eyebrow">Estudiante de Ingeniería de Sistemas</p>
-        <h1>Karen Grissel Vargas Medrano</h1>
+    <section class="section hero_section" id="inicio" aria-labelledby="hero_title">
+      <header class="hero_text">
+        <p class="eyebrow">Estudiante de Ingeniería de Sistemas</p>
+        <h1 id="hero_title">Karen Grissel Vargas Medrano</h1>
         <p class="hero_summary">
           Estudiante de sexto semestre de Ingeniería de Sistemas en la Universidad
           Católica Boliviana San Pablo, con interés en desarrollo de software,
@@ -77,122 +66,370 @@
           <li>karenvargasmedrano1@gmail.com</li>
           <li>+591 77770552</li>
         </ul>
-        <div class="hero_actions">
-          <a class="btn btn_primary" href="contacto.html">Escribir un mensaje</a>
-          <a class="btn btn_secondary" href="proyectos.html">Ver proyectos</a>
-        </div>
-      </div>
-      <figure class="hero_figure reveal_on_scroll">
-          <img src="assets/images/avatar.jpeg" alt="Fotografía de Karen Vargas Medrano" width="190" height="190">
+        <ul class="hero_actions">
+          <li><a class="btn btn_primary" href="#contacto">Escribir un mensaje</a></li>
+          <li><a class="btn btn_secondary" href="#proyectos">Ver proyectos</a></li>
+        </ul>
+      </header>
+      <figure class="hero_figure">
+        <img src="assets/images/avatar.jpeg" alt="Fotografía de Karen Vargas Medrano" width="220" height="220">
       </figure>
     </section>
 
-<section class="home_timeline_preview reveal_on_scroll">
-  <div class="timeline_preview_head">
-    <h2>Mi camino en la universidad</h2>
-    <a class="section_nav_arrow" href="formacion.html">ver formación completa -&gt;</a>
-  </div>
-  <ol class="timeline_list">
-    <li class="timeline_item">
-      <p class="timeline_date">2023</p>
-      <h3>Ingreso a la universidad</h3>
-      <p>Inicio de la carrera de Ingeniería de Sistemas en la Universidad Católica Boliviana San Pablo.</p>
-    </li>
-    <li class="timeline_item">
-      <p class="timeline_date">2023 - 2026</p>
-      <h3>Formación en curso</h3>
-      <p>Materias de programación, bases de datos, redes y desarrollo web a lo largo de la carrera.</p>
-    </li>
-    <li class="timeline_item">
-      <p class="timeline_date">2026</p>
-      <h3>Sexto semestre</h3>
-      <p>Cursando Tecnologías Web I y desarrollando este CV interactivo como evaluación práctica.</p>
-      <span class="badge badge_current">En curso</span>
-    </li>
-  </ol>
-</section>
-
-    <section class="reveal_on_scroll">
-      <div class="stat_grid">
-        <div class="stat_card">
-          <span class="stat_value">6</span>
-          <span class="stat_label">Proyectos académicos</span>
-        </div>
-        <div class="stat_card">
-          <span class="stat_value">7</span>
-          <span class="stat_label">Lenguajes y tecnologías</span>
-        </div>
-        <div class="stat_card">
-          <span class="stat_value">6</span>
-          <span class="stat_label">Semestre actual</span>
-        </div>
-        <div class="stat_card">
-          <span class="stat_value">2</span>
-          <span class="stat_label">Idiomas</span>
-        </div>
-      </div>
+    <section class="section" id="perfil" aria-labelledby="perfil_title">
+      <h2 id="perfil_title">Perfil profesional</h2>
+      <article class="perfil_text">
+        <p>
+          Cuento con experiencia académica en programación, diseño de aplicaciones,
+          desarrollo web, bases de datos y configuración de redes. Me interesa
+          fortalecer mis conocimientos técnicos mediante el desarrollo de proyectos
+          y la resolución de problemas tecnológicos, combinando fundamentos sólidos
+          de programación con buenas prácticas de diseño de software.
+        </p>
+        <h3>Habilidades personales</h3>
+        <ul class="tag_list">
+          <li class="tag">Trabajo en equipo</li>
+          <li class="tag">Responsabilidad</li>
+          <li class="tag">Resolución de problemas</li>
+          <li class="tag">Organización</li>
+          <li class="tag">Aprendizaje continuo</li>
+          <li class="tag">Adaptabilidad</li>
+          <li class="tag">Pensamiento lógico</li>
+        </ul>
+      </article>
+      <aside class="card perfil_aside" aria-labelledby="idiomas_title">
+        <h3 id="idiomas_title">Idiomas</h3>
+        <ul class="skill_list">
+          <li class="skill_item">
+            <p class="skill_head"><span>Español</span><span class="skill_level">Nativo</span></p>
+            <meter class="skill_meter" min="0" max="100" value="100" aria-label="Nivel de español: nativo"></meter>
+          </li>
+          <li class="skill_item">
+            <p class="skill_head"><span>Inglés</span><span class="skill_level">Intermedio</span></p>
+            <meter class="skill_meter" min="0" max="100" value="65" aria-label="Nivel de inglés: intermedio"></meter>
+          </li>
+          <li class="skill_item">
+            <p class="skill_head"><span>Coreano</span><span class="skill_level">Básico</span></p>
+            <meter class="skill_meter" min="0" max="100" value="25" aria-label="Nivel de coreano: básico"></meter>
+          </li>
+        </ul>
+      </aside>
     </section>
 
-    <section class="reveal_on_scroll">
-      <h2>Explora el CV por secciones</h2>
-      <p>Cada tarjeta abre una página independiente con la información completa.</p>
-      <div class="section_nav_grid">
-        <a class="section_nav_card" href="perfil.html" style="--dot-color:#c586c0">
-          <span class="section_nav_file">Sección 01</span>
-          <h3>Perfil profesional</h3>
-          <p>Quién soy y qué busco a nivel académico y profesional.</p>
-          <span class="section_nav_arrow">abrir página -&gt;</span>
-        </a>
-        <a class="section_nav_card" href="formacion.html" style="--dot-color:#98c379">
-          <span class="section_nav_file">Sección 02</span>
-          <h3>Formación académica</h3>
-          <p>Universidad, carrera y semestre actual.</p>
-          <span class="section_nav_arrow">abrir página -&gt;</span>
-        </a>
-        <a class="section_nav_card" href="habilidades.html" style="--dot-color:#e5a260">
-          <span class="section_nav_file">Sección 03</span>
-          <h3>Habilidades técnicas</h3>
-          <p>Lenguajes, bases de datos, herramientas e idiomas.</p>
-          <span class="section_nav_arrow">abrir página -&gt;</span>
-        </a>
-        <a class="section_nav_card" href="proyectos.html" style="--dot-color:#f07178">
-          <span class="section_nav_file">Sección 04</span>
-          <h3>Proyectos académicos</h3>
-          <p>Seis proyectos filtrables por categoría, con detalle interactivo.</p>
-          <span class="section_nav_arrow">abrir página -&gt;</span>
-        </a>
-        <a class="section_nav_card" href="experiencia.html" style="--dot-color:#61afef">
-          <span class="section_nav_file">Sección 05</span>
-          <h3>Experiencia</h3>
-          <p>Trayectoria académica y prácticas universitarias.</p>
-          <span class="section_nav_arrow">abrir página -&gt;</span>
-        </a>
-        <a class="section_nav_card" href="contacto.html" style="--dot-color:#c586c0">
-          <span class="section_nav_file">Sección 06</span>
-          <h3>Contacto</h3>
-          <p>Formulario con validación para escribirme directamente.</p>
-          <span class="section_nav_arrow">abrir página -&gt;</span>
-        </a>
-      </div>
+    <section class="section" id="formacion" aria-labelledby="formacion_title">
+      <h2 id="formacion_title">Formación académica</h2>
+      <ol class="timeline_list">
+        <li>
+          <article class="timeline_item">
+            <p class="timeline_date">2023 - presente</p>
+            <h3>Ingeniería de Sistemas</h3>
+            <p>Universidad Católica Boliviana San Pablo, La Paz, Bolivia.</p>
+            <p class="badge badge_current">Sexto semestre en curso</p>
+          </article>
+        </li>
+        <li>
+          <article class="timeline_item">
+            <p class="timeline_date">2010 - 2023</p>
+            <h3>Colegio San Luis de Gonzaga B</h3>
+            <p>Educación primaria y secundaria completa.</p>
+            <p class="badge">Cuadro de honor: 1er, 2do y 3er lugar</p>
+          </article>
+        </li>
+      </ol>
+
+      <article class="card">
+        <h3>Cursos y formación complementaria</h3>
+        <ul class="tag_list">
+          <li class="tag">Mecanografía</li>
+          <li class="tag">Inglés - Centro Boliviano Americano (CBA)</li>
+          <li class="tag">Programación orientada a objetos (curso online)</li>
+          <li class="tag">C++ (cursos complementarios)</li>
+        </ul>
+      </article>
+
+      <article class="areas_block">
+        <h3>Áreas de formación cursadas</h3>
+        <p class="section_note">Selecciona un área para ver el detalle de sus contenidos.</p>
+        <ul class="accordion_list" id="areas_accordion">
+          <li class="accordion_item">
+            <h4>
+              <button class="accordion_trigger" type="button" id="area_web_btn" aria-expanded="false" aria-controls="area_web_panel">Tecnologías Web I</button>
+            </h4>
+            <p class="accordion_panel" id="area_web_panel" role="region" aria-labelledby="area_web_btn" hidden>
+              HTML5, CSS3 moderno, JavaScript, responsividad, accesibilidad y control de versiones con Git.
+            </p>
+          </li>
+          <li class="accordion_item">
+            <h4>
+              <button class="accordion_trigger" type="button" id="area_bd_btn" aria-expanded="false" aria-controls="area_bd_panel">Bases de Datos</button>
+            </h4>
+            <p class="accordion_panel" id="area_bd_panel" role="region" aria-labelledby="area_bd_btn" hidden>
+              Modelado de bases de datos relacionales, lenguaje SQL, PostgreSQL y normalización de datos.
+            </p>
+          </li>
+          <li class="accordion_item">
+            <h4>
+              <button class="accordion_trigger" type="button" id="area_ad_btn" aria-expanded="false" aria-controls="area_ad_panel">Análisis y Diseño de Sistemas</button>
+            </h4>
+            <p class="accordion_panel" id="area_ad_panel" role="region" aria-labelledby="area_ad_btn" hidden>
+              Modelado de entidades, procesos y estructura funcional de sistemas de información.
+            </p>
+          </li>
+          <li class="accordion_item">
+            <h4>
+              <button class="accordion_trigger" type="button" id="area_rd_btn" aria-expanded="false" aria-controls="area_rd_panel">Redes y Comunicaciones</button>
+            </h4>
+            <p class="accordion_panel" id="area_rd_panel" role="region" aria-labelledby="area_rd_btn" hidden>
+              Configuración de dispositivos de red, VLAN, conectividad y servicios como DNS, HTTP y FTP.
+            </p>
+          </li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="section" id="habilidades" aria-labelledby="habilidades_title">
+      <h2 id="habilidades_title">Habilidades técnicas</h2>
+
+      <article class="card">
+        <h3>Lenguajes y tecnologías</h3>
+        <ul class="skill_list">
+          <li class="skill_item">
+            <p class="skill_head"><span>Java</span><span class="skill_level">80%</span></p>
+            <meter class="skill_meter" min="0" max="100" value="80" aria-label="Nivel de Java: 80 por ciento"></meter>
+          </li>
+          <li class="skill_item">
+            <p class="skill_head"><span>C++</span><span class="skill_level">70%</span></p>
+            <meter class="skill_meter" min="0" max="100" value="70" aria-label="Nivel de C++: 70 por ciento"></meter>
+          </li>
+          <li class="skill_item">
+            <p class="skill_head"><span>Python</span><span class="skill_level">75%</span></p>
+            <meter class="skill_meter" min="0" max="100" value="75" aria-label="Nivel de Python: 75 por ciento"></meter>
+          </li>
+          <li class="skill_item">
+            <p class="skill_head"><span>HTML5</span><span class="skill_level">90%</span></p>
+            <meter class="skill_meter" min="0" max="100" value="90" aria-label="Nivel de HTML5: 90 por ciento"></meter>
+          </li>
+          <li class="skill_item">
+            <p class="skill_head"><span>CSS3</span><span class="skill_level">85%</span></p>
+            <meter class="skill_meter" min="0" max="100" value="85" aria-label="Nivel de CSS3: 85 por ciento"></meter>
+          </li>
+          <li class="skill_item">
+            <p class="skill_head"><span>JavaScript</span><span class="skill_level">80%</span></p>
+            <meter class="skill_meter" min="0" max="100" value="80" aria-label="Nivel de JavaScript: 80 por ciento"></meter>
+          </li>
+          <li class="skill_item">
+            <p class="skill_head"><span>Dart / Flutter</span><span class="skill_level">65%</span></p>
+            <meter class="skill_meter" min="0" max="100" value="65" aria-label="Nivel de Dart y Flutter: 65 por ciento"></meter>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>Bases de datos</h3>
+        <ul class="skill_list">
+          <li class="skill_item">
+            <p class="skill_head"><span>PostgreSQL</span><span class="skill_level">75%</span></p>
+            <meter class="skill_meter" min="0" max="100" value="75" aria-label="Nivel de PostgreSQL: 75 por ciento"></meter>
+          </li>
+          <li class="skill_item">
+            <p class="skill_head"><span>SQL</span><span class="skill_level">80%</span></p>
+            <meter class="skill_meter" min="0" max="100" value="80" aria-label="Nivel de SQL: 80 por ciento"></meter>
+          </li>
+          <li class="skill_item">
+            <p class="skill_head"><span>Modelado de bases de datos</span><span class="skill_level">75%</span></p>
+            <meter class="skill_meter" min="0" max="100" value="75" aria-label="Nivel de modelado de bases de datos: 75 por ciento"></meter>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>Desarrollo y herramientas</h3>
+        <ul class="skill_list">
+          <li class="skill_item">
+            <p class="skill_head"><span>Visual Studio Code</span><span class="skill_level">90%</span></p>
+            <meter class="skill_meter" min="0" max="100" value="90" aria-label="Nivel de Visual Studio Code: 90 por ciento"></meter>
+          </li>
+          <li class="skill_item">
+            <p class="skill_head"><span>Git</span><span class="skill_level">80%</span></p>
+            <meter class="skill_meter" min="0" max="100" value="80" aria-label="Nivel de Git: 80 por ciento"></meter>
+          </li>
+          <li class="skill_item">
+            <p class="skill_head"><span>GitHub</span><span class="skill_level">80%</span></p>
+            <meter class="skill_meter" min="0" max="100" value="80" aria-label="Nivel de GitHub: 80 por ciento"></meter>
+          </li>
+          <li class="skill_item">
+            <p class="skill_head"><span>Diseño web responsivo</span><span class="skill_level">85%</span></p>
+            <meter class="skill_meter" min="0" max="100" value="85" aria-label="Nivel de diseño web responsivo: 85 por ciento"></meter>
+          </li>
+          <li class="skill_item">
+            <p class="skill_head"><span>Manipulación del DOM</span><span class="skill_level">80%</span></p>
+            <meter class="skill_meter" min="0" max="100" value="80" aria-label="Nivel de manipulación del DOM: 80 por ciento"></meter>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h3>Otros conocimientos</h3>
+        <ul class="tag_list">
+          <li class="tag">Estructuras de datos</li>
+          <li class="tag">Desarrollo de aplicaciones</li>
+          <li class="tag">Redes y configuración básica de dispositivos</li>
+          <li class="tag">Cisco Packet Tracer</li>
+          <li class="tag">Programación orientada a objetos</li>
+          <li class="tag">Mecanografía</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="section" id="proyectos" aria-labelledby="proyectos_title">
+      <h2 id="proyectos_title">Proyectos académicos</h2>
+      <p class="section_note">
+        Escribe para buscar en tiempo real o filtra por categoría. Cada tarjeta
+        abre el detalle del proyecto.
+      </p>
+
+      <form class="filter_form" id="projects_form" role="search" aria-label="Buscar y filtrar proyectos">
+        <label class="field_label" for="project_search">Buscar proyecto</label>
+        <input class="field_input" id="project_search" name="busqueda" type="search" maxlength="60" autocomplete="off" placeholder="Ej.: PostgreSQL, Flutter, redes">
+        <button class="btn btn_primary filter_submit" type="submit">Buscar</button>
+        <fieldset class="filter_group">
+          <legend class="field_label">Categoría</legend>
+          <ul class="chip_list" id="category_filters"></ul>
+        </fieldset>
+      </form>
+
+      <p class="results_count" id="projects_count" role="status" aria-live="polite"></p>
+      <ul class="projects_grid" id="projects_grid"></ul>
+      <p class="empty_state" id="projects_empty" hidden>
+        No se encontraron proyectos con esos criterios. Prueba con otra palabra o elige «Todos».
+      </p>
+      <noscript><p class="empty_state">Activa JavaScript para ver y filtrar los proyectos.</p></noscript>
+
+      <dialog class="project_dialog" id="project_dialog" aria-labelledby="dialog_title" aria-describedby="dialog_summary">
+        <article class="dialog_body">
+          <form method="dialog" class="dialog_close_form">
+            <button class="dialog_close" type="submit" aria-label="Cerrar detalle del proyecto">&times;</button>
+          </form>
+          <p class="project_category" id="dialog_category"></p>
+          <h3 id="dialog_title">Detalle del proyecto</h3>
+          <p id="dialog_summary"></p>
+          <ul class="detail_list" id="dialog_details"></ul>
+          <ul class="tag_list" id="dialog_tags" aria-label="Tecnologías y conceptos del proyecto"></ul>
+        </article>
+      </dialog>
+    </section>
+
+    <section class="section" id="experiencia" aria-labelledby="experiencia_title">
+      <h2 id="experiencia_title">Experiencia</h2>
+      <p class="badge badge_current">Experiencia profesional: en formación</p>
+      <p class="section_note">
+        Actualmente cuento principalmente con experiencia en proyectos académicos
+        y prácticas universitarias relacionados con programación, desarrollo web,
+        bases de datos, aplicaciones móviles y redes.
+      </p>
+      <ul class="practice_grid">
+        <li>
+          <article class="card">
+            <h3>Programación</h3>
+            <p>Desarrollo de algoritmos y estructuras de datos en Java y C++.</p>
+          </article>
+        </li>
+        <li>
+          <article class="card">
+            <h3>Desarrollo web</h3>
+            <p>Construcción de interfaces con HTML5, CSS3 y JavaScript.</p>
+          </article>
+        </li>
+        <li>
+          <article class="card">
+            <h3>Bases de datos</h3>
+            <p>Diseño y modelado de bases de datos relacionales con PostgreSQL.</p>
+          </article>
+        </li>
+        <li>
+          <article class="card">
+            <h3>Redes</h3>
+            <p>Configuración básica de dispositivos y servicios de red.</p>
+          </article>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section" id="github" aria-labelledby="github_title">
+      <h2 id="github_title">Repositorios en GitHub</h2>
+      <p class="section_note">
+        Datos en vivo desde la API REST pública de GitHub. Prueba con otro
+        usuario, o con uno inexistente para ver el manejo del error 404.
+      </p>
+
+      <form class="github_form" id="github_form" novalidate>
+        <label class="field_label" for="github_user">Usuario de GitHub</label>
+        <input class="field_input" id="github_user" name="usuario" type="text" value="karenvargasm" maxlength="39" autocomplete="off" spellcheck="false" required aria-describedby="github_hint">
+        <button class="btn btn_primary" type="submit">Cargar repositorios</button>
+        <p class="field_hint" id="github_hint">Solo letras, números y guiones (máx. 39 caracteres).</p>
+      </form>
+
+      <section class="github_panel" id="github_panel" aria-label="Resultado de la consulta a GitHub" aria-busy="false"></section>
+    </section>
+
+    <section class="section" id="contacto" aria-labelledby="contacto_title">
+      <h2 id="contacto_title">Contacto</h2>
+      <form class="contact_form" id="contact_form" novalidate aria-describedby="contact_note">
+        <p class="section_note" id="contact_note">Todos los campos son obligatorios y se validan mientras escribes. Esta demostración no envía datos a un servidor.</p>
+
+        <p class="form_field">
+          <label class="field_label" for="input_name">Nombre completo</label>
+          <input class="field_input" id="input_name" name="nombre" type="text" autocomplete="name" required minlength="3" maxlength="80" aria-describedby="error_name">
+          <span class="field_error" id="error_name" aria-live="polite"></span>
+        </p>
+
+        <p class="form_field">
+          <label class="field_label" for="input_email">Correo electrónico</label>
+          <input class="field_input" id="input_email" name="correo" type="email" autocomplete="email" required maxlength="120" pattern="[^\s@]+@[^\s@]+\.[^\s@]{2,}" aria-describedby="error_email">
+          <span class="field_error" id="error_email" aria-live="polite"></span>
+        </p>
+
+        <p class="form_field">
+          <label class="field_label" for="input_subject">Asunto</label>
+          <input class="field_input" id="input_subject" name="asunto" type="text" required minlength="3" maxlength="100" aria-describedby="error_subject">
+          <span class="field_error" id="error_subject" aria-live="polite"></span>
+        </p>
+
+        <p class="form_field">
+          <label class="field_label" for="input_message">Mensaje</label>
+          <textarea class="field_input" id="input_message" name="mensaje" rows="5" required minlength="10" maxlength="500" aria-describedby="error_message message_counter"></textarea>
+          <span class="field_error" id="error_message" aria-live="polite"></span>
+          <span class="field_counter" id="message_counter">0 / 500</span>
+        </p>
+
+        <button class="btn btn_primary" type="submit">Validar mensaje</button>
+        <p class="form_status" id="form_status" role="status"></p>
+      </form>
+
+      <aside class="card contact_aside" aria-labelledby="otros_contactos_title">
+        <h3 id="otros_contactos_title">Otras formas de contacto</h3>
+        <dl class="fact_list">
+          <dt>Correo</dt>
+          <dd>karenvargasmedrano1@gmail.com</dd>
+          <dt>Teléfono</dt>
+          <dd>+591 77770552</dd>
+          <dt>Ubicación</dt>
+          <dd>La Paz, Bolivia</dd>
+        </dl>
+        <button class="btn btn_secondary" id="copy_email" type="button" data-email="karenvargasmedrano1@gmail.com">Copiar correo</button>
+        <p class="copy_status" id="copy_status" role="status"></p>
+      </aside>
     </section>
 
   </main>
-</div>
 
-<footer class="site_footer">
-  <p>&copy; <span id="current_year"></span> Karen Grissel Vargas Medrano</p>
-  <ul class="social_links" aria-label="Enlaces profesionales">
-    <li><a href="https://github.com/karenvargasm" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-    <li><a href="http://www.linkedin.com/in/karen-grissel-vargas-medrano-57955a436" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-    <li><a href="mailto:karenvargasmedrano1@gmail.com" id="email_link">Correo</a></li>
-  </ul>
-</footer>
-
-<p class="email_toast" id="email_toast" role="status" aria-live="polite"></p>
-
-<script src="js/theme.js"></script>
-<script src="js/nav.js"></script>
-<script src="js/email.js"></script>
-<script src="js/reveal.js"></script>
+  <footer class="site_footer">
+    <p>&copy; <span id="current_year">2026</span> Karen Grissel Vargas Medrano · SIS-214 Tecnologías Web I</p>
+    <ul class="social_links" aria-label="Enlaces profesionales">
+      <li><a href="https://github.com/karenvargasm" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/karen-grissel-vargas-medrano-57955a436" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      <li><a href="mailto:karenvargasmedrano1@gmail.com">Correo</a></li>
+    </ul>
+  </footer>
 </body>
 </html>
