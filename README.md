@@ -1,86 +1,133 @@
 # CV Interactivo - Karen Grissel Vargas Medrano
 
-Proyecto para la Primera Evaluación Práctica de Tecnologías Web I (SIS-214),
-Universidad Católica Boliviana.
+Landing page interactiva de CV / portafolio profesional. Segunda evaluación
+práctica de **Tecnologías Web I (SIS-214)**, Unidad II: Desarrollo de
+Interfaces Dinámicas con JavaScript. Universidad Católica Boliviana
+"San Pablo".
 
-## Estructura del proyecto
+- **Producción (GitHub Pages):** <https://karenvargasm.github.io/SIS214_ExamenPractico2_VargasKaren/>
+- **Repositorio:** <https://github.com/karenvargasm/SIS214_ExamenPractico2_VargasKaren>
+
+> La entrega del Examen 1 (CV multipágina) queda marcada con el tag
+> `v1.0-examen1`. Este examen evoluciona el mismo proyecto.
+
+> El repositorio existente se renombró para cumplir la nomenclatura del
+> Examen 2, conservando su historial y sus commits. Los cambios de esta copia
+> local todavía no se han publicado. GitHub Pages ya está activo en la URL de
+> producción indicada, pero su última publicación todavía no incluye estos
+> cambios locales.
+
+## Tecnologías utilizadas
+
+| Capa | Tecnología |
+| --- | --- |
+| Estructura | HTML5 semántico + WAI-ARIA |
+| Estilos | CSS3: Flexbox, Grid, custom properties, Media Queries (Mobile-First) |
+| Lógica | JavaScript ES6+ con módulos nativos (`import` / `export`) |
+| Datos externos | API REST pública de GitHub mediante Fetch API |
+| Persistencia | `localStorage` (tema) y `sessionStorage` (caché de la API) |
+| Versionado y despliegue | Git, GitHub y GitHub Pages |
+
+No usa frameworks ni dependencias: todo es HTML, CSS y JS nativos.
+
+## Arquitectura de la solución
 
 ```
 Cv-interactivo-Vargas/
-├── index.html
-├── perfil.html
-├── formacion.html
-├── habilidades.html
-├── proyectos.html
-├── experiencia.html
-├── contacto.html
+├── index.html                # Landing de una sola página (todas las secciones)
 ├── css/
-│   ├── base.css
-│   ├── layout.css
-│   ├── components.css
-│   └── pages.css
+│   ├── base.css              # Tokens (:root), reset universal, tipografía, accesibilidad
+│   ├── layout.css            # Cabecera, navegación, rejillas y breakpoints (Mobile-First)
+│   └── components.css        # Botones, tarjetas, formularios, acordeón, modal, estados de la API
 ├── js/
-│   ├── theme.js
-│   ├── nav.js
-│   ├── email.js
-│   ├── formation-areas.js
-│   ├── reveal.js
-│   ├── projects.js
-│   └── contact.js
-├── assets/
-│   └── images/
+│   ├── main.js               # Punto de entrada: inicializa los módulos
+│   ├── data/
+│   │   └── projects.js       # Datos de proyectos (inmutables con Object.freeze)
+│   └── modules/
+│       ├── theme.js          # Tema claro/oscuro + localStorage (JSON.stringify/parse)
+│       ├── menu.js           # Menú hamburguesa (aria-expanded) + sección activa
+│       ├── projects.js       # Buscador/filtro en tiempo real (.filter().map())
+│       ├── contact.js        # Formulario con validación nativa y preventDefault()
+│       ├── github.js         # Fetch API async/await, loading/success/error
+│       ├── ui.js             # Acordeón accesible, copiar correo, año del pie
+│       └── utils.js          # escapeHtml() y normalizeText()
+├── assets/images/
 └── README.md
 ```
 
-## Organización por bloques
+> Los archivos multipágina y de soporte del Examen 1 se conservan en el árbol
+> local, pero la landing del Examen 2 se sirve desde `index.html` y no los
+> carga ni enlaza.
 
-Cada sección del CV vive en su propia página HTML y cada bloque de
-funcionalidad tiene su propio archivo CSS o JS:
+### Decisiones de diseño
 
-- `base.css`: variables globales, reset y tipografía
-- `layout.css`: encabezado, navegación lateral, pie de página
-- `components.css`: botones, tarjetas, modal, formulario, acordeón
-- `pages.css`: estilos específicos de páginas y responsividad
-- `theme.js`: modo claro y oscuro persistente
-- `nav.js`: enlace activo según la página actual y menú móvil
-- `email.js`: copia el correo al portapapeles con confirmación visual
-- `formation-areas.js`: despliega el detalle de cada área de formación
-- `reveal.js`: animaciones al hacer scroll y barras de progreso
-- `projects.js`: datos de proyectos, filtro por categoría y modal
-- `contact.js`: validación del formulario de contacto
+- **Una sola página:** al ser una *landing page*, cada apartado es una
+  `<section>` con ancla (`#perfil`, `#proyectos`, `#contacto`...) y la
+  navegación hace scroll suave a cada una.
+- **Semántica sin "divitis":** el `index.html` de entrada usa `header`, `nav`,
+  `main`, `section`, `article`, `aside`, `footer`, `figure`, `dl`, `meter` y
+  `dialog`; no contiene ningún `<div>`.
+- **Flexbox vs Grid:** Flexbox para alineaciones de una dimensión (cabecera,
+  menú, chips, botones, pie); Grid para esquemas de dos dimensiones (hero,
+  perfil, rejillas de habilidades, proyectos, repositorios y contacto).
+- **Mobile-First:** los estilos base son para móvil (< 768px). Se amplían con
+  `@media (min-width: 768px)` (tablet: 768px a 1024px) y
+  `@media (min-width: 1025px)` (escritorio: > 1024px).
+- **Nomenclatura:** variables CSS en `kebab-case` (`--primary-color`), clases e
+  ids en `snake_case` (`.project_card`, `#contact_form`), JavaScript en
+  `camelCase` y constantes en `UPPER_SNAKE_CASE`.
 
-## Funcionalidades
+## Las 5 funcionalidades JavaScript
 
-- Navegación multipágina real: cada apartado del menú abre su propio
-  archivo HTML en vez de saltar a un ancla dentro de la misma página
-- Línea de tiempo de formación académica en la página de inicio
-- Barras de habilidades animadas al hacer scroll
-- Filtro de proyectos por categoría con modal de detalle
-- Panel desplegable con el detalle de cada área de formación cursada
-- Formulario de contacto con validación en tiempo real
-- Modo claro y oscuro persistente entre páginas, con paleta cálida en modo claro
-- Diseño responsivo con menú lateral colapsable en móvil
-- Accesibilidad: enlace de salto al contenido, foco de teclado visible,
-  aria-live, aria-invalid, aria-expanded, prefers-reduced-motion
+| # | Funcionalidad | Archivo | Cómo funciona |
+| --- | --- | --- | --- |
+| 1 | Conmutador de tema | `theme.js` | Alterna `data-theme` en `<html>`; guarda `{theme, savedAt}` con `JSON.stringify()` en `localStorage` y lo restaura con `JSON.parse()` al recargar. Si no hay preferencia usa la del sistema. |
+| 2 | Menú hamburguesa | `menu.js` | `click` conmuta la clase `is_open` y muta `aria-expanded` y `aria-label`. También cierra con Escape, clic fuera o clic en un enlace. |
+| 3 | Buscador / filtro | `projects.js` | Evento `input` + chips de categoría. Los datos están congelados y se procesan con `projects.filter().filter().map()` sin mutarlos. Ignora tildes y mayúsculas. |
+| 4 | Formulario de contacto | `contact.js` | `submit` interceptado con `event.preventDefault()`. Validación nativa (Constraint Validation API: `required`, `minlength`, `type=email`, `pattern`) en tiempo real con `input` y mensajes de error/éxito por campo. Es una demostración frontend; no envía datos a un servidor. |
+| 5 | Módulo asíncrono REST | `github.js` | `fetch` + `async/await` en `try...catch...finally`. Evalúa `response.ok` y gestiona 200, 400, 403/429, 404, 500, 502/503, timeout y fallo de red. Muestra estados *cargando*, *éxito* y *error* (con botón Reintentar). |
+
+Para probar el estado de error del módulo 5, escribe un usuario inexistente
+en la sección **Repositorios en GitHub** (devuelve 404).
+
+## Accesibilidad (WAI-ARIA / WCAG)
+
+- Enlace "Saltar al contenido principal" y foco de teclado visible.
+- `aria-expanded` + `aria-controls` en el menú y el acordeón; `aria-pressed` en
+  el tema y los filtros; `aria-current` en la sección activa.
+- `aria-label` en navegaciones, medidores (`<meter>`) y botones de icono.
+- `role="search"`, `role="status"`, `role="alert"`, `aria-live`, `aria-busy` y
+  `aria-invalid` / `aria-describedby` en formularios y estados dinámicos.
+- Modal nativo `<dialog>` (foco atrapado y cierre con Escape).
+- Contraste verificado en ambos temas y respeto de `prefers-reduced-motion`.
 
 ## Cómo ejecutarlo localmente
 
+Los módulos ES6 requieren un servidor HTTP (no funcionan abriendo el archivo
+con `file://`).
+
 ```bash
+git clone https://github.com/karenvargasm/SIS214_ExamenPractico2_VargasKaren.git
+cd SIS214_ExamenPractico2_VargasKaren
 python3 -m http.server 8000
 ```
 
-Luego visita `http://localhost:8000`.
+Luego abre <http://localhost:8000>. Alternativa: extensión *Live Server* de
+VS Code.
 
-## Publicación en GitHub Pages
+## Despliegue en GitHub Pages
 
-```bash
-git add .
-git commit -m "docs: actualizar readme"
-git push
-```
+El repositorio público ya tiene el nombre exigido y GitHub Pages está
+configurado desde la rama `main`, carpeta raíz (`/`). Cuando los cambios locales
+estén listos para publicar, súbelos a `main`; luego verifica la actualización en
+la URL de producción indicada arriba.
 
-En GitHub: Settings, Pages, Branch main, carpeta raíz, Save.
+## Control de versiones
 
-## Validación
+Se usan commits pequeños y atómicos con mensajes descriptivos siguiendo
+*Conventional Commits* (`feat:`, `fix:`, `refactor:`, `docs:`, `style:`,
+`chore:`).
 
-Antes de entregar, valida cada página en <https://validator.w3.org/>
+## Autora
+
+Karen Grissel Vargas Medrano · Ingeniería de Sistemas · UCB "San Pablo"
