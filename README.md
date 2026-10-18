@@ -12,10 +12,10 @@ Interfaces Dinámicas con JavaScript. Universidad Católica Boliviana
 > `v1.0-examen1`. Este examen evoluciona el mismo proyecto.
 
 > El repositorio existente se renombró para cumplir la nomenclatura del
-> Examen 2, conservando su historial y sus commits. Los cambios de esta copia
-> local todavía no se han publicado. GitHub Pages ya está activo en la URL de
-> producción indicada, pero su última publicación todavía no incluye estos
-> cambios locales.
+> Examen 2, conservando su historial y sus commits. Los cambios del proyecto
+> están publicados en la rama `main`. GitHub Pages está activo y la última
+> versión de producción incluye el rediseño visual y la corrección del selector
+> de tema.
 
 ## Tecnologías utilizadas
 
@@ -33,7 +33,7 @@ No usa frameworks ni dependencias: todo es HTML, CSS y JS nativos.
 ## Arquitectura de la solución
 
 ```
-Cv-interactivo-Vargas/
+SIS214_ExamenPractico2_VargasKaren/
 ├── index.html                # Landing de una sola página (todas las secciones)
 ├── css/
 │   ├── base.css              # Tokens (:root), reset universal, tipografía, accesibilidad
@@ -98,8 +98,31 @@ en la sección **Repositorios en GitHub** (devuelve 404).
 - `aria-label` en navegaciones, medidores (`<meter>`) y botones de icono.
 - `role="search"`, `role="status"`, `role="alert"`, `aria-live`, `aria-busy` y
   `aria-invalid` / `aria-describedby` en formularios y estados dinámicos.
-- Modal nativo `<dialog>` (foco atrapado y cierre con Escape).
+- Diálogo nativo `<dialog>` con nombre accesible y botón explícito de cierre.
 - Contraste verificado en ambos temas y respeto de `prefers-reduced-motion`.
+
+## Verificación frente a la rúbrica
+
+La implementación cubre los cinco criterios de la rúbrica del Examen 2. Esta
+tabla resume las evidencias técnicas verificadas; la calificación final
+corresponde a la evaluación docente.
+
+| Criterio | Evidencia |
+| --- | --- |
+| HTML5 semántico y accesibilidad (20 pts) | La landing usa las siete etiquetas estructurales requeridas, atributos WAI-ARIA y no usa `<div>`. El validador W3C Nu no reportó mensajes para el HTML publicado. |
+| CSS3 responsivo y maquetación (20 pts) | CSS Mobile-First con Flexbox, Grid, media queries y los tokens/reset requeridos. Se comprobó en móvil, tablet y escritorio (320, 390, 768, 1024 y 1440 px), sin desbordamiento horizontal. |
+| JavaScript ES6+, DOM y persistencia (35 pts) | Están implementadas las cinco funciones exigidas: tema persistente, menú ARIA, filtro inmutable, formulario con validación y módulo REST asíncrono. Se probaron sus estados principales, incluida la respuesta 404 de GitHub. |
+| Git, GitHub y despliegue (15 pts) | Repositorio público con la nomenclatura solicitada, historial de 34 commits y GitHub Pages operativo. El despliegue del commit `67c7b2f` terminó correctamente. |
+| README y buenas prácticas (10 pts) | Este documento describe tecnologías, arquitectura, instrucciones locales y enlaces públicos. El código se organiza en módulos y sigue las convenciones de nombres indicadas. |
+
+**Nota de validación CSS:** el validador CSS3 de W3C/Jigsaw marca `clip-path`
+en `.sr_only` como propiedad desconocida. `clip-path` es una propiedad CSS
+moderna utilizada para ocultar visualmente texto accesible; el aviso corresponde
+a la compatibilidad del perfil del validador, no a un error reportado por el
+navegador. El resto de la hoja se carga en producción.
+
+Las pruebas descritas son comprobaciones funcionales manuales en navegador; el
+repositorio no incluye una suite automatizada de pruebas.
 
 ## Cómo ejecutarlo localmente
 
@@ -118,9 +141,18 @@ VS Code.
 ## Despliegue en GitHub Pages
 
 El repositorio público ya tiene el nombre exigido y GitHub Pages está
-configurado desde la rama `main`, carpeta raíz (`/`). Cuando los cambios locales
-estén listos para publicar, súbelos a `main`; luego verifica la actualización en
-la URL de producción indicada arriba.
+configurado desde la rama `main`, carpeta raíz (`/`). La última publicación
+exitosa corresponde al commit `67c7b2f`. La URL de producción indicada arriba
+sirve la versión desplegada desde esa rama.
+
+### Enlaces para la entrega en Moodle
+
+La rúbrica indica entregar únicamente estas dos URL públicas:
+
+```text
+https://github.com/karenvargasm/SIS214_ExamenPractico2_VargasKaren
+https://karenvargasm.github.io/SIS214_ExamenPractico2_VargasKaren/
+```
 
 ## Control de versiones
 
