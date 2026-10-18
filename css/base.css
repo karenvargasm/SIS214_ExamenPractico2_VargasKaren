@@ -1,129 +1,191 @@
+/* ==========================================================================
+   base.css
+   Tokens de diseño (custom properties), reset universal y tipografía base.
+   Convención: variables CSS en kebab-case, clases e ids en snake_case.
+   ========================================================================== */
+
+/* --- Tokens de diseño (tema claro por defecto) --------------------------- */
 :root {
-  --font_mono: 'JetBrains Mono', 'Courier New', monospace;
-  --font_sans: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Tokens obligatorios de la rúbrica */
+  --primary-color: #0056b3;
+  --secondary-color: #17a2b8;
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --font-family-base: 'Segoe UI', system-ui, sans-serif;
+  --spacing-unit: 1rem;
 
-  --accent_function: #61afef;
-  --accent_keyword: #c586c0;
-  --accent_string: #98c379;
-  --accent_warning: #e5a260;
-  --accent_error: #f07178;
+  /* Tokens complementarios */
+  --font-family-mono: ui-monospace, 'Cascadia Code', 'Consolas', monospace;
+  --surface-color: #f4f7fb;
+  --surface-alt-color: #e6edf7;
+  --border-color: #d3deec;
+  --muted-color: #566274;
+  --on-primary-color: #ffffff;
+  --error-color: #b42318;
+  --success-color: #157347;
+  --shadow-color: rgba(16, 42, 82, 0.14);
 
-  --bg_body: #1e1e2e;
-  --bg_panel: #262637;
-  --bg_panel_alt: #2d2d42;
-  --text_main: #e8e6e3;
-  --text_muted: #9aa0b3;
-  --border_soft: #3a3a52;
+  --radius-base: 0.625rem;
+  --radius-lg: 1rem;
+  --transition-base: 0.2s ease;
+  --max-width: 72rem;
+  --header-height: 4rem;
 
-  --radius_base: 10px;
-  --radius_lg: 16px;
-  --transition_base: 0.2s ease;
-  --transition_slow: 0.45s ease;
-  --max_width: 1180px;
+  /* Tamaño de gutter lateral: crece de forma progresiva (mobile-first) */
+  --gutter: var(--spacing-unit);
+  --section-space: calc(var(--spacing-unit) * 3);
+
+  color-scheme: light;
 }
 
-[data-theme='light'] {
-  --bg_body: #f7f1e7;
-  --bg_panel: #fffaf2;
-  --bg_panel_alt: #f0e6d6;
-  --text_main: #2c2620;
-  --text_muted: #6f6455;
-  --border_soft: #e6d9c3;
+/* --- Tema oscuro: se activa con data-theme="dark" en <html> -------------- */
+:root[data-theme='dark'] {
+  --primary-color: #6cb2ff;
+  --secondary-color: #4fd1e5;
+  --bg-color: #0f1420;
+  --text-color: #e6e9ef;
+  --surface-color: #171e2e;
+  --surface-alt-color: #212c44;
+  --border-color: #2c3850;
+  --muted-color: #a3adc2;
+  --on-primary-color: #0b1220;
+  --error-color: #ff8a80;
+  --success-color: #6fd29b;
+  --shadow-color: rgba(0, 0, 0, 0.45);
+
+  color-scheme: dark;
 }
 
-*, *::before, *::after {
+/* --- Reset universal (regla obligatoria) --------------------------------- */
+* {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* --- Elementos base ------------------------------------------------------- */
 html {
   scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
+  scroll-padding-top: calc(var(--header-height) + var(--spacing-unit));
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  margin: 0;
-  background-color: var(--bg_body);
-  color: var(--text_main);
-  font-family: var(--font_sans);
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-family-base);
+  font-size: 1rem;
   line-height: 1.65;
-  transition: background-color var(--transition_base), color var(--transition_base);
+  transition: background-color var(--transition-base), color var(--transition-base);
 }
 
-h1, h2, h3, h4 {
-  font-family: var(--font_mono);
+h1,
+h2,
+h3,
+h4 {
   line-height: 1.25;
-  margin: 0 0 0.55em;
   letter-spacing: -0.01em;
+  margin-bottom: calc(var(--spacing-unit) * 0.6);
 }
 
-h1 { font-size: clamp(2rem, 5vw, 3.1rem); }
-h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
-h3 { font-size: 1.08rem; }
-h4 { font-size: 0.95rem; color: var(--text_muted); }
+h1 { font-size: clamp(2rem, 7vw, 3.25rem); }
+h2 { font-size: clamp(1.5rem, 4vw, 2.1rem); }
+h3 { font-size: 1.15rem; }
+h4 { font-size: 1rem; }
 
 p {
-  margin: 0 0 1em;
-  color: var(--text_main);
+  margin-bottom: var(--spacing-unit);
 }
 
 a {
-  color: var(--accent_function);
+  color: var(--primary-color);
 }
 
 img {
-  max-width: 100%;
   display: block;
+  max-width: 100%;
+  height: auto;
 }
 
-ul, ol {
-  margin: 0;
-  padding: 0;
+ul,
+ol {
   list-style: none;
 }
 
-button {
+button,
+input,
+textarea,
+select {
   font: inherit;
+  color: inherit;
 }
 
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible {
-  outline: 3px solid var(--accent_function);
+button {
+  cursor: pointer;
+}
+
+/* --- Accesibilidad: foco visible, salto de contenido, texto solo lector --- */
+:focus-visible {
+  outline: 3px solid var(--primary-color);
   outline-offset: 2px;
 }
 
 .skip_link {
   position: absolute;
-  left: -999px;
   top: 0;
-  background: var(--accent_function);
-  color: #10131c;
-  padding: 0.75em 1.25em;
+  left: -100vw;
   z-index: 100;
-  border-radius: 0 0 var(--radius_base) 0;
+  padding: 0.75em 1.25em;
+  border-radius: 0 0 var(--radius-base) 0;
+  background-color: var(--primary-color);
+  color: var(--on-primary-color);
 }
 
 .skip_link:focus {
   left: 0;
 }
 
-.reveal_on_scroll {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity var(--transition_slow), transform var(--transition_slow);
+.sr_only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
-.reveal_on_scroll.is_visible {
-  opacity: 1;
-  transform: translateY(0);
+/* Respeta la preferencia de movimiento reducido del sistema */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Mobile-first: ajustes progresivos del gutter ------------------------ */
+@media (min-width: 768px) {
+  :root {
+    --gutter: calc(var(--spacing-unit) * 2);
+    --section-space: calc(var(--spacing-unit) * 4);
+  }
+}
+
+@media (min-width: 1025px) {
+  :root {
+    --gutter: calc(var(--spacing-unit) * 3);
+    --section-space: calc(var(--spacing-unit) * 5);
+  }
 }

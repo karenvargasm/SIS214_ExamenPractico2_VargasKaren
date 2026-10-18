@@ -1,287 +1,302 @@
+/* ==========================================================================
+   layout.css
+   Maquetación general. Enfoque Mobile-First:
+     - Estilos base  : móvil (< 768px)
+     - Tablet        : 768px a 1024px
+     - Escritorio    : > 1024px
+
+   Criterio de uso:
+     - Flexbox  -> alineaciones de UNA dimensión (cabecera, navegación,
+                   grupos de botones, pie de página).
+     - CSS Grid -> esquemas de DOS dimensiones (hero, perfil, rejillas de
+                   tarjetas, contacto).
+   ========================================================================== */
+
+/* Márgenes laterales centrados sin contenedores extra (evita "divitis"):
+   el relleno lateral crece hasta que el contenido alcanza --max-width. */
+.site_header,
+.section,
+.site_footer {
+  --side-space: max(var(--gutter), calc((100% - var(--max-width)) / 2));
+  padding-inline: var(--side-space);
+}
+
+/* --- Cabecera (Flexbox) --------------------------------------------------- */
 .site_header {
   position: sticky;
   top: 0;
   z-index: 30;
-  background-color: color-mix(in srgb, var(--bg_panel) 88%, transparent);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border_soft);
-}
-
-.header_inner {
-  max-width: var(--max_width);
-  margin: 0 auto;
-  padding: 0.9rem 1.5rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: var(--spacing-unit);
+  min-height: var(--header-height);
+  background-color: color-mix(in srgb, var(--bg-color) 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .logo_link {
   display: flex;
   align-items: center;
-  gap: 0.65em;
+  gap: 0.65rem;
   text-decoration: none;
+  color: var(--text-color);
+  font-weight: 700;
 }
 
 .logo_badge {
-  display: block;
   flex-shrink: 0;
   border-radius: 50%;
 }
 
-.logo_text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-}
-
 .logo_name {
-  font-family: var(--font_mono);
-  font-weight: 700;
-  font-size: 0.92rem;
-  color: var(--text_main);
-  margin: 0;
-}
-
-.logo_sub {
-  font-family: var(--font_mono);
-  font-size: 0.72rem;
-  color: var(--text_muted);
+  font-size: 0.95rem;
+  white-space: nowrap;
 }
 
 .header_actions {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
+  margin-left: auto;
 }
 
-.mobile_nav_toggle {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius_base);
-  background-color: var(--bg_panel_alt);
-  border: 1px solid var(--border_soft);
-  cursor: pointer;
-}
-
-.mobile_nav_toggle span {
-  display: block;
-  width: 18px;
-  height: 2px;
-  background-color: var(--text_main);
-  position: relative;
-}
-
-.mobile_nav_toggle span::before,
-.mobile_nav_toggle span::after {
-  content: '';
+/* --- Navegación móvil: panel colapsable controlado por aria-expanded ------ */
+.main_nav {
   position: absolute;
+  top: 100%;
   left: 0;
-  width: 18px;
-  height: 2px;
-  background-color: var(--text_main);
+  right: 0;
+  padding: var(--spacing-unit) var(--gutter);
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 18px 30px -18px var(--shadow-color);
+  /* Cerrado: fuera de la vista, del orden de tabulación y de lectores de pantalla */
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-0.5rem);
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base),
+    visibility 0s linear 0.2s;
 }
 
-.mobile_nav_toggle span::before { top: -6px; }
-.mobile_nav_toggle span::after { top: 6px; }
-
-.theme_toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.6em;
-  background-color: var(--bg_panel_alt);
-  color: var(--text_main);
-  border: 1px solid var(--border_soft);
-  border-radius: 999px;
-  padding: 0.4em 1em 0.4em 0.7em;
-  font-family: var(--font_sans);
-  font-size: 0.88rem;
-  cursor: pointer;
-  transition: transform var(--transition_base), border-color var(--transition_base);
-}
-
-.theme_toggle:hover {
-  transform: translateY(-1px);
-  border-color: var(--accent_warning);
-}
-
-.toggle_icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background-color: var(--bg_panel);
-}
-
-.toggle_icon svg {
-  width: 16px;
-  height: 16px;
-}
-
-.icon_moon {
-  display: block;
-  color: var(--accent_function);
-}
-
-.icon_sun {
-  display: none;
-  color: var(--accent_warning);
-}
-
-[data-theme='light'] .icon_moon {
-  display: none;
-}
-
-[data-theme='light'] .icon_sun {
-  display: block;
-}
-
-.layout_shell {
-  max-width: var(--max_width);
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  display: grid;
-  grid-template-columns: 232px 1fr;
-  gap: 2.75rem;
-  align-items: start;
-}
-
-.side_nav {
-  position: sticky;
-  top: 5rem;
-  padding: 1.4rem 0 3rem;
-}
-
-.nav_heading {
-  font-family: var(--font_mono);
-  color: var(--text_muted);
-  font-size: 0.78rem;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.9rem;
+.main_nav.is_open {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0s;
 }
 
 .nav_list {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.25rem;
 }
 
 .nav_link {
-  display: flex;
-  align-items: center;
-  gap: 0.65em;
-  padding: 0.5em 0.65em;
-  border-radius: var(--radius_base);
-  color: var(--text_muted);
+  display: block;
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--radius-base);
+  color: var(--text-color);
+  font-weight: 600;
   text-decoration: none;
-  font-family: var(--font_mono);
-  font-size: 0.87rem;
-  transition: background-color var(--transition_base), color var(--transition_base);
+  transition: background-color var(--transition-base), color var(--transition-base);
 }
 
 .nav_link:hover,
 .nav_link:focus-visible {
-  background-color: var(--bg_panel_alt);
-  color: var(--text_main);
+  background-color: var(--surface-alt-color);
 }
 
 .nav_link.is_active {
-  background-color: var(--bg_panel_alt);
-  color: var(--text_main);
-  border: 1px solid var(--border_soft);
+  background-color: var(--surface-alt-color);
+  color: var(--primary-color);
 }
 
-.nav_dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: var(--dot-color, var(--accent_function));
-  flex-shrink: 0;
+/* --- Secciones ------------------------------------------------------------ */
+.section {
+  padding-block: var(--section-space);
+  border-bottom: 1px solid var(--border-color);
 }
 
-.nav_footer_note {
-  margin-top: 1.5rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--border_soft);
-  font-size: 0.78rem;
-  color: var(--text_muted);
-  font-family: var(--font_mono);
+.section > h2 {
+  margin-bottom: var(--spacing-unit);
 }
 
-main {
-  padding-bottom: 3rem;
-  min-width: 0;
+/* Todas las rejillas de contenido comparten una sola columna en móvil */
+.hero_section,
+#perfil,
+#habilidades,
+#experiencia .practice_grid,
+#contacto,
+.projects_grid,
+.repo_grid {
+  display: grid;
+  gap: calc(var(--spacing-unit) * 1.5);
 }
 
+.hero_section {
+  padding-block: calc(var(--spacing-unit) * 2) var(--section-space);
+  align-items: center;
+}
+
+.hero_figure {
+  justify-self: center;
+  order: -1; /* en móvil la fotografía va primero */
+}
+
+#formacion {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 1.5);
+}
+
+#habilidades > h2,
+#perfil > h2,
+#contacto > h2 {
+  grid-column: 1 / -1;
+}
+
+/* --- Pie de página (Flexbox) --------------------------------------------- */
 .site_footer {
-  max-width: var(--max_width);
-  margin: 0 auto;
-  padding: 2rem 1.5rem 3rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
   align-items: center;
   justify-content: space-between;
-  color: var(--text_muted);
+  gap: var(--spacing-unit);
+  padding-block: calc(var(--spacing-unit) * 2);
+  color: var(--muted-color);
   font-size: 0.9rem;
-  border-top: 1px solid var(--border_soft);
+}
+
+.site_footer p {
+  margin-bottom: 0;
 }
 
 .social_links {
   display: flex;
-  gap: 1.4rem;
+  flex-wrap: wrap;
+  gap: calc(var(--spacing-unit) * 1.25);
 }
 
 .social_links a {
-  color: var(--text_muted);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 0.4em;
+  color: var(--muted-color);
 }
 
 .social_links a:hover {
-  color: var(--accent_function);
+  color: var(--primary-color);
 }
 
-@media (max-width: 860px) {
-  .layout_shell {
-    grid-template-columns: 1fr;
-    gap: 0;
+/* ==========================================================================
+   TABLET: 768px a 1024px
+   La navegación sigue siendo un menú hamburguesa, pero se muestra como una
+   tarjeta flotante en lugar de ocupar todo el ancho.
+   ========================================================================== */
+@media (min-width: 768px) {
+  .logo_name {
+    font-size: 1.05rem;
   }
 
-  .mobile_nav_toggle {
-    display: flex;
+  .hero_section {
+    grid-template-columns: 1.4fr 1fr;
+    gap: calc(var(--spacing-unit) * 3);
   }
 
-  .side_nav {
-    position: fixed;
-    inset: 0;
-    top: 64px;
-    background-color: var(--bg_body);
-    padding: 1.5rem;
-    transform: translateX(-100%);
-    transition: transform var(--transition_slow);
-    z-index: 25;
-    overflow-y: auto;
+  .hero_figure {
+    order: 0;
   }
 
-  .side_nav.is_open {
-    transform: translateX(0);
+  #perfil {
+    grid-template-columns: 1.4fr 1fr;
+    align-items: start;
+  }
+
+  #habilidades {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+  }
+
+  #experiencia .practice_grid,
+  .projects_grid,
+  .repo_grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #contacto {
+    grid-template-columns: 1.4fr 1fr;
+    align-items: start;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .main_nav {
+    left: auto;
+    right: var(--gutter);
+    width: 18rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+  }
+}
+
+/* ==========================================================================
+   ESCRITORIO: > 1024px
+   La navegación pasa a ser horizontal dentro de la cabecera.
+   ========================================================================== */
+@media (min-width: 1025px) {
+  .main_nav {
+    position: static;
+    flex: 1;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
   }
 
   .nav_list {
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 0.15rem;
+  }
+
+  .nav_link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.92rem;
+  }
+
+  .header_actions {
+    margin-left: 0;
+  }
+
+  .hero_section {
+    grid-template-columns: 1.6fr 1fr;
+  }
+
+  #habilidades {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #experiencia .practice_grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .projects_grid,
+  .repo_grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Escritorio estrecho (1025px a 1199px): cabecera compacta para que quepan los 7 enlaces */
+@media (min-width: 1025px) and (max-width: 1199px) {
+  .site_header {
     gap: 0.5rem;
   }
 
   .nav_link {
-    font-size: 1rem;
-    padding: 0.85em 0.75em;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.88rem;
   }
 }
